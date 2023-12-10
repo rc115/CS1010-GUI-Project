@@ -13,8 +13,6 @@ Who in your team will be doing what? GUI designer, Documentation, leadership, Co
  Connor Moy: GUI designer and Core programmer
 
 
-FAQs:
-
 Q: Can't run it correctly?
 A: How to install our game:
    1. Download our zip file
@@ -34,35 +32,41 @@ A: Casual or beginner players of black jack can play our game as it can be a goo
 Q: How will your game be played? 
 A: Steps to step on how to play:
 
-   1. After running the program it will start in the menu screen, here you can enter as many simoleons you want to play with but there is a minumum of 10 and a maximum of 1m
+   1. After running the program it will start in the menu screen, 
+      here you can enter as many simoleons you want to play with... but there is a minumum of §10 and a maximum of §1m,
+      after you've entered a valid ammount the start button will activate which will start the game.
 
-   1. You will first put in how many chips you will play with (minimum of 10), in the game then confirm it with the enter button and press the start button to get to the next window.
+   2. The hit and stand buttons will be disabled until a valid bet is entered,
+      then pressing hit will take the entered bet from your 'chips'.
 
-   2.  Next you will enter in the box below how many chips you will play with. A minimum of 10 chips is needed to play.
+   3. Pressing hit once will give you and the dealer 2 cards,
+      after this the stand button will activate and pressing it will end the round.
 
-   3. Press the "Enter Bet" button and then press the "Hit" button to start your game.
+   4. Win conditions:
+        If the player stands with 21, they win.
+        If the player exceeds 21, they lose and the dealer wins
+        If you stand and you are closer to 21 than the dealer you win
+        If you stand and the dealer is closer to 21 than you then the dealer wins
+        If you and the dealer have same valued totals, then it's a tie
+        If either the player or dealer gets blackjack the round ends
 
-   4. You will be given your hand and the dealer will get their hand, you will press the hit or stand button to get closer to 21 than the dealer. (the hit button will give you another card) (the stand button will keep your     current cards)
+   5. After you win or lose your bet will be decided;
+        Winning with blackjack triples your bet
+        Winning by beating the dealer doubles your bet
+        Tieing with the dealer gives back your bet
+        Losing will not return your bet
 
-   5. Win conditions:
-        If the player stands with 21, they win.                                        (Doubles bet)
-        If the player exceeds 21, they lose and the dealer wins                        (Loses Bet)
-        If you stand and you are closer to 21 than the dealer you win                  (Doubles bet)
-        If you stand and the dealer is closer to 21 than you then the dealer wins      (Loses bet)
-        If you and the dealer have same valued totals, then it's a tie                 (You get back the same ammount that you bet)
+   6. After the round is over you can restart if you enter a new bet,
+      if you have less than the minimum bet you will be booted to the menu screen,
+      here you can enter a new balance to your chips to play again.
 
-   6. After a winner and loser are decided chips will be given accordingly: Win: Gives you double your bet Lose: You lose what you bet Tie: You lose nothing
-
-   7. Then you can press the reset button to play again and repeat through steps 2-6 until you fall below 10 chips which signifies a loss or you exceed 1 million chips.
+   7. If at any point you have more than §1,000,000.00, you will be escorted off the premises. Says it in the name.
 
 
 Bug Reports/features:
 
 Bugs(If you find any put here):
-* If you stand before hitting first you win instantly (Infinite money glitch)
-* If player and dealer have 21 player always wins (should be tie)
 * You can get more than 4 of the same card 
-* Dealer doesn't stop if it's close to busting (It will try it's hardest to beat the player at least)
 *
 * 
 * 
