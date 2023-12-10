@@ -75,7 +75,8 @@ def center_content(window):
     monBox.place(x=window.winfo_width() // 2 + 50, y=50, anchor='c')
     enterBtn.place(x=window.winfo_width() // 2 - 100, y=50, anchor='c')
     chipLbl.place(x=window.winfo_width() // 2 - 50, y=50, anchor='c')
-    endLbl.place(x=window.winfo_width() // 2, y=170, anchor='c')
+    endLbl.place(x=window.winfo_width() // 2, y=250, anchor='c')
+    msgLbl.place(x=window.winfo_width() // 2, y=470, anchor='c')
 
 def gC(): # gets 1 card and puts it into the cards list
     global cards, cT, cImgY
@@ -214,7 +215,7 @@ def dlrCard(): # Gives dealer 1 card and puts in hand
             dT += 1
 
 def stand(): # Ends Round
-    global cT, dT, bet, chips, sCheck, profit, loss
+    global cT, dT, bet, chips, sCheck, profit, loss, standBtn
 
     dealerPlay()
     sCheck = True
@@ -223,8 +224,6 @@ def stand(): # Ends Round
 
     totalLbl.config(text=(f'Total: {cT}'))
     dTotalLbl.config(text=(f"Dealer's Total: {dT}"))
-    hitBtn.config(state=tk.DISABLED)
-    standBtn.config(state=tk.DISABLED)
 
     if cT > 21: # If the cards add up to more than 21 you lose
         totalLbl.config(text=f'Total: {cT} Bust!')
@@ -250,6 +249,9 @@ def stand(): # Ends Round
             winLbl.config(text="It's a tie!", font=('Helvetica', 12, 'bold'))
             chips += bet
             monLbl.config(text=(f"Chips: §{chips}"))
+    
+    hitBtn.config(state=tk.DISABLED)
+    standBtn.config(state=tk.DISABLED)
 
 def aceCheck():
     global cT, cards, ace
@@ -257,16 +259,19 @@ def aceCheck():
         if ace == True:
             hitBtn.config(state=tk.DISABLED)
             standBtn.config(state=tk.DISABLED)
-        elif (cards.count('A') >= 1) and (cards.index('A') == 1 or cards.index('A') == 2): # If you get an ace in your first hit it will turn that ace into 1 
-            cT -= 10
-            ace = True
-            totalLbl.config(text=(f'Total: {cT}'))
+        elif (cards.count('A') >= 1):
+            if ((cards.index('A')) == 0) or ((cards.index('A')) == 1): # If you get an ace in your first hit it will turn that ace into 1 
+                cT -= 10
+                ace = True
+                totalLbl.config(text=(f'Total: {cT}'))
         else:
             hitBtn.config(state=tk.DISABLED)
             standBtn.config(state=tk.DISABLED)
 
 def hit(): # Gives dealer and player 2 cards then 1 card to player
     global cards, cT, chips, bet, sCheck, rounds
+
+    betBtn.config(state=tk.DISABLED)
 
     if len(cards) == 0: # Gives 2 Cards first hit and takes bet from money
         for i in range(2):
@@ -278,8 +283,8 @@ def hit(): # Gives dealer and player 2 cards then 1 card to player
         rounds += 1
         chips -= bet # Takes bet from chips at the start of round
         monLbl.config(text=(f"Chips: §{chips}"))
-        bjCheck()
         standBtn.config(state=tk.NORMAL)
+        bjCheck()
     else: # Only gives 1 card after first hit
         gC()
     
@@ -304,12 +309,16 @@ def dealerPlay(): # Dealer draws cards after player stands
             dlrCard()
 
         if dT > 21: # If the dealer busts you win
-            if dCards.index('A') == 1 or dCards.index('A') == 2:
-                dT -= 10
-                continue
+            if dCards.count('A') >= 1:
+                if ((dCards.index('A')) == 0) or ((dCards.index('A')) == 1):
+                    dT -= 10
+                    continue
+                else:
+                    break
             else:
                 dT = 0
                 break
+                
 
 def leave(): # Quits the game
     proLoss()
@@ -353,6 +362,7 @@ def rstBlj(): # Resets game
     dCardsLbl.config(text="Dealer's Cards:")
     hitBtn.config(state=tk.DISABLED)
     standBtn.config(state=tk.DISABLED)
+    betBtn.config(state=tk.NORMAL)
     dTotalLbl.config(text="Dealer's Total:")
     hideCard()
 
@@ -369,7 +379,7 @@ def placeGame(): # Places Blackjack frame
 def proLoss():
     global profit, loss, chips, rounds, sMon
 
-    endLbl.config(text=f"Started with: §{sMon}\n\nPlayed {rounds} rounds\n\nWon: §{profit}\n\nLost: §{loss}\n\nProfit/Loss: §{profit-loss}\n\nFinal Chips: §{chips}")
+    endLbl.config(text=f"Started with: §{sMon}\n\nPlayed {rounds} rounds\n\nWon: §{profit}\n\nLost: §{loss}\n\nProfit/Loss: §{profit-loss-sMon}\n\nFinal Chips: §{chips}")
 
 def bjCheck():
     global cards, cT, dCards, dT, chips, profit, loss, bet
@@ -379,14 +389,16 @@ def bjCheck():
         chips += bet*3
         monLbl.config(text=(f"Chips: §{chips}"))
         profit += bet*2
-        stand()
+        totalLbl.config(text='Blackjack!')
         standBtn.config(state=tk.DISABLED)
+        hitBtn.config(state=tk.DISABLED)
     elif (len(dCards) == 2) and (dT == 21):
-        winLbl.config(text='You Win!', font=('Helvetica', 12, 'bold'))
+        backFrm.place_forget()
+        winLbl.config(text='You Lost.', font=('Helvetica', 12, 'bold'))
         monLbl.config(text=(f"Chips: §{chips}"))
-        loss += bet
-        stand()
+        dTotalLbl.config(text='Blackjack!')
         standBtn.config(state=tk.DISABLED)
+        hitBtn.config(state=tk.DISABLED)
 
 
 #   ∨ ∨   Menu Screen Widgets   ∨ ∨
@@ -398,6 +410,7 @@ monBox = tk.Entry(menuFrm, bg='#0c3b16', fg='White') # Entry box for chips
 enterBtn = tk.Button(menuFrm, text='Enter', bg='#22552d', activebackground='#0c3b16', fg='White', activeforeground='White', command=chipC)
 chipLbl = tk.Label(menuFrm, text="Chips:  §",font=('Helvetica',10 , 'bold'), bg='#22552d', fg='White')
 endLbl = tk.Label(menuFrm, text="",font=('Helvetica',10 , 'bold'), bg='#22552d', fg='White')
+msgLbl = tk.Label(menuFrm, text="!! We do not condone gambling this is just a game !!",font=('Helvetica',10 , 'bold'), bg='#22552d', fg='#0c3b16')
 
 #   ∨ ∨ Game Screen Widgets   ∨ ∨
 hitBtn = tk.Button(bljFrm, text='Hit', bg='#0c3b16', activebackground='#22552d', fg='White', activeforeground='#0c3b16', command=hit) # Hit button
