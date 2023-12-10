@@ -22,7 +22,9 @@ A: How to install our game:
    5. Gamble until you're a millionaire
 
 Q: What is your project about? - Game, application, etc? 
-A: Our project is a game that depicts the game of Black Jack. Allowing you to set certain amounts of to chips to bet with and play the game. You're game will end once you ran out of chips, but it will continue as long as you have chips to play with.
+A: Our project is a game that depicts the game of Black Jack. 
+   Allowing you to set certain amounts of to chips to bet with and play the game. 
+   You're game will end once you ran out of chips, but it will continue as long as you have chips to play with.
 
 
 Q: Who can play your game or use your application?
@@ -33,7 +35,8 @@ Q: How will your game be played?
 A: Steps to step on how to play:
 
    1. After running the program it will start in the menu screen, 
-      here you can enter as many simoleons you want to play with... but there is a minumum of §10 and a maximum of §1m,
+      here you can enter as many simoleons you want to play with,
+      there is a minumum of §10 and a maximum of §1m,
       after you've entered a valid ammount the start button will activate which will start the game.
 
    2. The hit and stand buttons will be disabled until a valid bet is entered,
