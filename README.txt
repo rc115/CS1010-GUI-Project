@@ -18,7 +18,8 @@ A: How to install our game:
    1. Download our zip file
    2. Extract the zip file
    3. If you have python installed, double click the file
-   4. (Optional) If the program crashes and can't find the 'Assets' folder, move that folder to whereever it's looking for it
+   4. (Optional) If the program crashes and can't find the 'Assets' folder, 
+      move that folder to whereever it's looking for it
    5. Gamble until you're a millionaire
 
 Q: What is your project about? - Game, application, etc? 
