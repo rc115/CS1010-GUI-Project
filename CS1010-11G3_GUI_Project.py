@@ -317,8 +317,7 @@ def dealerPlay(): # Dealer draws cards after player stands
                     break
             else:
                 dT = 0
-                break
-                
+                break     
 
 def leave(): # Quits the game
     proLoss()
